@@ -173,6 +173,11 @@ import {UserConfigService} from './user-config/user-config.service';
               pathMatch: 'full'
             },
             {
+                path: 'studytab',
+                redirectTo: '/studytab',
+                pathMatch: 'full'
+            },
+            {
                 path: 'studycheck',
                 redirectTo: '/studycheck',
                 pathMatch: 'full'
