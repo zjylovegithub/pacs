@@ -83,11 +83,20 @@ import { StudyChecklistComponent } from './study-checklist/study-checklist.compo
 import { StudyTabPanelComponent } from './study-tab-panel/study-tab-panel.component';
 import { StudyDiagnoseComponent } from './study-diagnose/study-diagnose.component';
 import { StudytabService } from './study-tab-panel/study-tab.service';
+import {PanelModule} from 'primeng/components/panel/panel';
+import {LoginComponent} from './login/login.component';
+import {LoginService} from './login/login.service';
+import {MessagesModule} from 'primeng/components/messages/messages';
+import {MessageModule} from 'primeng/components/message/message';
+import {UserConfigComponent} from './user-config/user-config.component';
+import {UserConfigService} from './user-config/user-config.service';
 
 @NgModule({
     declarations: [
         AppComponent,
         StudiesComponent,
+        LoginComponent,
+        UserConfigComponent,
         StudiesComponent1,
         StudyChecklistComponent,
         TemplateTreeComponent,
@@ -150,15 +159,18 @@ import { StudytabService } from './study-tab-panel/study-tab.service';
         ButtonModule,
         FieldsetModule,
         TreeModule,
+        MessagesModule,
+        MessageModule,
         DropdownModule,
+        PanelModule,
         ReactiveFormsModule,
         BrowserAnimationsModule,
         FileUploadModule,
         RouterModule.forRoot([
             {
-                path: '',
-                redirectTo: '/studytab',
-                pathMatch: 'full'
+              path: '',
+              redirectTo: '/login',
+              pathMatch: 'full'
             },
             {
                 path: 'studycheck',
@@ -175,6 +187,8 @@ import { StudytabService } from './study-tab-panel/study-tab.service';
                 redirectTo: '/monitoring/queues',
                 pathMatch: 'full'
             },
+            { path: 'login', component: LoginComponent},
+            { path: 'user/list', component: UserConfigComponent},
             { path: 'studies', component: StudiesComponent },
             { path: 'studytab', component: StudyTabPanelComponent },
             { path: 'studycheck', component: StudyChecklistComponent },
@@ -204,6 +218,8 @@ import { StudytabService } from './study-tab-panel/study-tab.service';
         WidgetsComponents,
         AppService,
         StudiesService,
+        LoginService,
+        UserConfigService,
         ControlService,
         QueuesService,
         DevicesService,

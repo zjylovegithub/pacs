@@ -1,0 +1,54 @@
+<div class="main_content devicelist aes">
+		<div class="devicelist_block">
+			<ul class="nav nav-tabs" role="tablist">
+				
+				<li role="presentation" routerLinkActive="active"><a
+					aria-controls="aet_modus" routerLink="/device/aelist" role="tab"
+					routerLinkActive="active">用户管理</a></li>				
+			</ul>
+			<div role="tabpanel" class="aet_modus" id="aet_modus">
+				<h2>用户列表</h2>
+				<input autocomplete="off" id="aesfilter" class="aesfilter"
+					[(ngModel)]="aesfilter" placeholder="Search AEs" />
+				<button class="adddevice" (click)="createAe()"
+					title="Register new application entity">
+					<span class="glyphicon glyphicon-plus"></span>
+				</button>				
+				
+				<table class="j4care-table">
+					<thead>
+						<tr>
+							<th></th>
+							<th>用户名称</th>
+							<th>创建时间</th>
+							<th>最后更新时间</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr
+							*ngFor="let user of userList; let i = index">
+							<td class="buttons_td"><span class="numbers">{{i+1}}.</span>
+								<a class="table_btn" title="Echo" href=""
+								(click)="$event.preventDefault();echoAe(ae.dicomAETitle)"> <span
+									class="echo_icon"></span>
+								</a>
+								<a
+								class="table_btn" title="Delete from device the AE" href=""
+								(click)="$event.preventDefault();deleteAE(ae.dicomDeviceName, ae.dicomAETitle)">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
+							</td>							
+							<td>{{user.userId}}</td>
+							<td>{{user.userId}}</td>
+							<td>{{user.userId}}</td>							
+						</tr>
+					</tbody>
+				</table>
+				<button class="load_more" *ngIf="aes && moreAes.limit <= aes.length"
+					(click)="loadMoreAes()">
+					<i *ngIf="moreAes.loaderActive"
+						class="fa fa-spinner fa-spin fa-3x fa-fw"></i>More
+				</button>
+			</div>
+		</div>
+	</div>

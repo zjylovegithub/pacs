@@ -1,0 +1,29 @@
+<div id="floater"></div>
+<div class="centered">
+	<div class="login_content">
+		<p-panel header="用户登录">
+			<div class="ui-g">
+				<div class="ui-g-4">用户名</div>
+				<div id="div_userName" class="ui-g-8">
+					<input type="text" [(ngModel)]="userName"  pInputText placeholder="" class="ng-dirty ng-invalid">
+					<p-message severity="error" text="用户名必填"></p-message>
+				</div>
+			</div>
+			<div class="ui-g">
+				<div class="ui-g-4">密码</div>
+				<div id="div_password" class="ui-g-8">
+					<input type="password" [(ngModel)]="password"  pInputText placeholder="" class="ng-dirty ng-invalid">
+					<p-message severity="error" text="密码必填"></p-message>
+				</div>
+			</div>		
+			<div class="ui-g">
+				<div class="ui-g-12">
+					<button class="save" type="button" (click)="login()">登录</button>
+					
+				</div>
+			</div>
+			
+		</p-panel>
+	</div>
+</div>
+	

@@ -51,6 +51,7 @@ export class AppComponent implements OnInit {
         public $http:J4careHttpService
     ){}
 
+    userName;
     ngOnInit(){
         Date.prototype.toDateString = function() {
             return `${this.getFullYear()}${j4care.getSingleDateTimeValueFromInt(this.getMonth()+1)}${j4care.getSingleDateTimeValueFromInt(this.getDate())}${j4care.getSingleDateTimeValueFromInt(this.getHours())}${j4care.getSingleDateTimeValueFromInt(this.getMinutes())}${j4care.getSingleDateTimeValueFromInt(this.getSeconds())}`;
@@ -61,7 +62,7 @@ export class AppComponent implements OnInit {
             this.mainservice.user
                 .subscribe(
                     (response) => {
-
+console.log("response=====", response);
                         if(_.hasIn(response,"token") && response.token === null){
                             if ($this.mainservice.global && !$this.mainservice.global.notSecure){
                                 let global = _.cloneDeep($this.mainservice.global);
@@ -139,6 +140,12 @@ export class AppComponent implements OnInit {
                         $this.initGetDevicename(2);
                     }
                 );
+            /*let user = this.mainservice.getUser().subscribe((response) =>{
+                console.log("response======",response);
+
+            },(response) => {
+
+            });*/
         }
         let currentBrowserTime = new Date().getTime();
         this.$http.get('../monitor/serverTime')

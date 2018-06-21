@@ -60,6 +60,10 @@
 		routerLinkActive="active">检查列表</a></li>
 	<li (click)="showMenu = false;"><a routerLink="studies"
 		routerLinkActive="active">模板配置</a></li>	
+	<li (click)="showMenu = false;"><a routerLink="users"
+		routerLinkActive="active">用户管理</a></li>
+	<li (click)="showMenu = false;"><a routerLink="roles"
+		routerLinkActive="active">角色管理</a></li>		
 	<!--<li (click)="showMenu = false;" *ngIf="isRole('admin')"><a routerLink="control" routerLinkActive="active">Control</a></li>-->
 	<li (click)="showMenu = false;" *ngIf="isRole('admin')"><a
 		routerLink="device/devicelist" routerLinkActive="active">系统配置</a></li>

@@ -1,0 +1,16 @@
+.ui-g-4 { text-align: center; line-height: 29px;}
+.ui-g-12 { text-align: center;}
+#floater {
+    position: relative;
+    float: left;
+    height: 50%;
+    margin-bottom: -220px;
+    width: 1px;
+}
+.centered {
+    position: relative;
+    clear: left;
+    height: 500px;    
+    width: 500px;
+    margin: 0 auto;    
+}
