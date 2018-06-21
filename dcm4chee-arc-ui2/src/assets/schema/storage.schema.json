@@ -1,0 +1,76 @@
+{
+	"title": "Storage",
+	"description": "Storage Descriptor",
+	"type": "object",
+	"required": [
+		"dcmStorageID",
+		"dcmURI",
+		"dcmInstanceAvailability",
+		"dcmReadOnly"
+	],
+	"properties": {
+		"dcmStorageID": {
+			"title": "Storage ID",
+			"description": "Storage ID",
+			"type": "string"
+		},
+		"dcmURI": {
+			"title": "Storage URI",
+			"description": "RFC2079: Uniform Resource Identifier",
+			"type": "string"
+		},
+		"dcmDigestAlgorithm": {
+			"title": "Digest Algorithm",
+			"description": "Algorithm for generation of check sums.",
+			"type": "string",
+			"enum": [
+				"MD5",
+				"SHA-1"
+			]
+		},
+		"dcmInstanceAvailability": {
+			"title": "Instance Availability",
+			"description": "Instance Availability.",
+			"type": "string",
+			"default": "ONLINE",
+			"enum": [
+				"ONLINE",
+				"NEARLINE",
+				"OFFLINE"
+			]
+		},
+		"dcmReadOnly": {
+			"title": "Read Only",
+			"description": "Indicates if a Storage System is read only.",
+			"type": "boolean",
+			"default": false
+		},
+		"dcmStorageThreshold": {
+			"title": "Storage Threshold",
+			"description": "Minimal Usable Space on Storage System. If the usable space fall below that value the Storage System will be removed from the list of configured Storage Systems of the Network AE requesting that Storage System. Format nnn(MB|GB|MiB|GiB)",
+			"type": "string"
+		},
+		"dcmDeleterThreshold": {
+			"title": "Deleter Threshold",
+			"description": "Minimal Usable Space on Storage System to trigger deletion. If present, studies are deleted from the Storage System, if the usable space fall below that value. Format [nn'['<schedule>']']nnn(MB|GB|MiB|GiB)",
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		},
+		"dcmExternalRetrieveAET": {
+			"title": "External Retrieve AET",
+			"description": "Constrain deletion of Studies, whose objects are retrievable using this AE from an external C-MOVE SCP, if usable space falls below configured threshold.",
+			"type": "string",
+			"format": "dcmAETitle"
+		},
+		"dcmProperty": {
+			"title": "Storage Property",
+			"description": "Property in format <name>=<value>",
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		}
+	}
+}

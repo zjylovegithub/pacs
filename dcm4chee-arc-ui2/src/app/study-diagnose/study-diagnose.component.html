@@ -1,0 +1,102 @@
+<div class="ui-g">
+    <div class="ui-g-8">
+      <p-fieldset legend="基本资料">	
+        <div class="ui-g">
+          <div class="ui-g-1">姓名</div>
+          <div class="ui-g-3"><input type="text" id="patientName" [(ngModel)]="editPatientName" pInputText placeholder=""></div>
+          <div class="ui-g-1">性别</div>
+          <div class="ui-g-3">
+            <p-dropdown [options]="patientSexOptions" [(ngModel)]="selectedSex" [style]="{'width':'100%'}"></p-dropdown>
+          </div>
+          <div class="ui-g-1">年龄</div>
+          <div class="ui-g-3"><input type="text" id="patientAge" [(ngModel)]="editPatientAge" pInputText placeholder=""></div>
+        </div>		
+        <div class="ui-g">
+          <div class="ui-g-1">放射号</div>
+          <div class="ui-g-3"><input type="text" id="patientNo" [(ngModel)]="editPatientNo" pInputText placeholder=""></div>
+          <div class="ui-g-1">检查号</div>
+          <div class="ui-g-3"><input type="text" id="accessionNumber" [(ngModel)]="editAccessionNumber" pInputText placeholder=""></div>
+          <div class="ui-g-1">检查日期</div>
+          <div class="ui-g-3">
+            <p-calendar [(ngModel)]="editStudyDate" [style]="{'width':'90%'}" [showIcon]="true"></p-calendar>
+          </div>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-1">检查类型</div>
+          <div class="ui-g-3"><input type="text" id="modality" [(ngModel)]="editModality" pInputText placeholder=""></div>
+          <div class="ui-g-1">检查部位</div>
+          <div class="ui-g-3"><input type="text" id="bodyPartExamined" [(ngModel)]="editBodyPartExamined" pInputText placeholder=""></div>
+          <div class="ui-g-1">检查医生</div>
+          <div class="ui-g-3"><input type="text" pInputText placeholder=""></div>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-1">门诊号</div>
+          <div class="ui-g-3"><input type="text" pInputText placeholder=""></div>
+          <div class="ui-g-1">住院号</div>
+          <div class="ui-g-3"><input type="text" pInputText placeholder=""></div>
+          <div class="ui-g-1">病区号</div>
+          <div class="ui-g-3"><input type="text" pInputText placeholder=""></div>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-1">床位号</div>
+          <div class="ui-g-3"><input type="text" pInputText placeholder=""></div>
+          <div class="ui-g-1">送检科室</div>
+          <div class="ui-g-3"><input type="text" [(ngModel)]="editInstitutionalDepartmentName" pInputText placeholder=""></div>
+          <div class="ui-g-1">送检医生</div>
+          <div class="ui-g-3"><input type="text" [(ngModel)]="editReferringPhysicianName" pInputText placeholder=""></div>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-1">HP</div>
+          <div class="ui-g-3">							
+            <p-dropdown [options]="hpOptions" [(ngModel)]="selectedHP" [style]="{'width':'100%'}"></p-dropdown>						
+          </div>
+          <div class="ui-g-1">医技号</div>
+          <div class="ui-g-3"><input type="text" pInputText placeholder=""></div>
+          <div class="ui-g-1">检查收费</div>
+          <div class="ui-g-3"><input type="text" pInputText placeholder=""></div>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-1">主诉</div>
+          <div class="ui-g-11"><input type="text" pInputText placeholder=""></div>						
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-1">医生建议</div>
+          <div class="ui-g-11"><input type="text" pInputText placeholder=""></div>						
+        </div>
+      </p-fieldset>
+      <div style="margin: .5em 0 0 0;">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">检查所见</span>
+          <textarea [rows]="5" [cols]="200" id="findings" pInputTextarea autoResize="autoResize" style="width: 100%; margin: .5em 0 0 0;"></textarea>
+        </div>
+      </div>
+      <div>
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">检查意见</span>
+          <textarea [rows]="5" [cols]="200" id="inspectionOpinion" pInputTextarea autoResize="autoResize" style="width: 100%;"></textarea>
+        </div>
+      </div>	
+      <div style="text-align: center;">
+        <button class="save" type="button" (click)="savePatient()">保存修改</button>
+      </div>			
+    </div>
+    <div class="ui-g-4">
+      <p-fieldset legend="医生模板">
+        <app-template-tree></app-template-tree>
+      </p-fieldset>
+
+      <div style="margin: .5em 0 0 0;">
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">检查所见</span>
+          <button pButton type="button" (click)="setCheckItems()" icon="fa-arrow-circle-left" class="ui-button-secondary" label="引用模板"></button>
+          <textarea [rows]="5" [cols]="200" id="tmpFindings" pInputTextarea autoResize="autoResize" style="width: 100%; margin: .5em 0 0 0;"></textarea>
+        </div>
+      </div>
+      <div>
+        <div class="ui-inputgroup">
+          <span class="ui-inputgroup-addon">检查意见</span>
+          <textarea [rows]="5" [cols]="200" id="tmpInspectionOpinion" pInputTextarea autoResize="autoResize" style="width: 100%;"></textarea>
+        </div>
+      </div>
+    </div>
+  </div>

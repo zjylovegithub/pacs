@@ -1,0 +1,249 @@
+<div class="main_content">	
+    <div *ngIf="user">				
+      <!-- <div class="headerblock" [ngClass]="{modality:showModalitySelector}" -->
+        <div class="headerblock"
+        (keydown)="keyDownOnHeader($event)">
+        <div style="text-align: right; padding-right: 2em;">
+          <a class="" title="清空查询条件" href=""
+            (click)="$event.preventDefault();clearForm()"> 清空 <span
+            class="glyphicon glyphicon-remove"></span>
+          </a>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-1">姓名</div>
+          <div class="ui-g-2"><input class="col-md-12"></div>
+          <!-- <div class="ui-g-2"><input type="text" id="PatientName" [(ngModel)]="filter.PatientName" placeholder="" class="col-md-12"></div> -->
+          <div class="ui-g-1">性别</div>
+          <div class="ui-g-2">							
+            <select id="PatientSex" name="reject" class="col-md-12" style="height: 26px;"
+              (change)="filters.PatientSex = $event.target.value">	
+              <option>*</option>							
+              <option *ngFor="let s of options.genders"
+                value="{{ s.Value }}">{{ s.title }}</option>
+            </select>
+          </div>
+          <div class="ui-g-1">年龄</div>
+          <div class="ui-g-2"><input type="text" id="PatientAge" [(ngModel)]="filter.PatientAge" placeholder="" class="col-md-12"></div>
+          <div class="ui-g-1">放射号</div>
+          <div class="ui-g-2"><input type="text" id="PatientID" [(ngModel)]="filter.PatientID" placeholder="" class="col-md-12"></div>
+        </div>		
+        <div class="ui-g">
+          <div class="ui-g-1">检查号</div>
+          <div class="ui-g-2"><input type="text" id="AccessionNumber" [(ngModel)]="filter.AccessionNumber" placeholder="" class="col-md-12"></div>
+          <div class="ui-g-1">检查日期</div>
+          <div class="ui-g-2">							
+            <range-picker [model]="filter.StudyDate"
+                    (modelChange)="filter.StudyDate = $event" mode="range"
+                    placeholder="" dateFormat="yymmdd" onlyDate="true"></range-picker>
+          </div>
+          <div class="ui-g-1">检查类型</div>
+          <div class="ui-g-2">
+            <input *ngIf="filterMode === 'study' || filterMode === 'diff'"
+              type="text" size="5" [(ngModel)]="filter.ModalitiesInStudy"
+              (click)="showModalitySelector = !showModalitySelector"
+              placeholder="" class="col-md-12"
+              ng-keypress="checkKeyModality($event)" />
+            <div class="modality_selector [hidden]"
+              *ngIf="showModalitySelector">
+              <a href="" (click)="showModalitySelector=false" class="close"><i
+                class="glyphicon glyphicon-remove"></i></a>
+              <div class="common">
+                <a href="" *ngFor="let value of modalities.common | getKey;"
+                 (click)="$event.preventDefault();selectModality(value._KEY)"
+                  title="{{value._VALUE}}">{{value._KEY}}</a>
+              </div>
+              <button
+                (click)="filter.ModalitiesInStudy='';filter.ScheduledProcedureStepSequence.Modality='';showModalitySelector=false;"
+                class="clear custom_button">清空</button>
+              
+              <a href="" (click)="$event.preventDefault();showMore=true"
+                *ngIf="!showMore" class="more">more<i
+                class="glyphicon glyphicon-triangle-bottom"></i></a> 
+                <a href=""
+                (click)="$event.preventDefault();showMore=false"
+                *ngIf="showMore" class="more">less<i
+                class="glyphicon glyphicon-triangle-top"></i></a>
+              <div class="more_block" *ngIf="showMore">
+                <a href="" *ngFor="let value of modalities.more | getKey;"
+                  (click)="$event.preventDefault();selectModality(value._KEY)"
+                  title="{{value._VALUE}}">{{value._KEY}}</a>
+                <div class="form-group">
+                  <label>Custom modality code:</label> <input
+                    *ngIf="filterMode === 'mwl'"
+                    [(ngModel)]="filter['ScheduledProcedureStepSequence.Modality']" />
+                  <input
+                    *ngIf="filterMode === 'study' || filterMode === 'diff'"
+                    [(ngModel)]="filter.ModalitiesInStudy" />
+                  <button (click)="showModalitySelector=false"
+                    class="custom_button">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="ui-g-1">检查部位</div>
+          <div class="ui-g-2"><input type="text" id="bodyPartExamined" placeholder="" class="col-md-12"></div>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-1">检查医生</div>
+          <div class="ui-g-2"><input type="text" placeholder="" class="col-md-12"></div>
+          <div class="ui-g-1">门诊号</div>
+          <div class="ui-g-2"><input type="text" placeholder="" class="col-md-12"></div>
+          <div class="ui-g-1">住院号</div>
+          <div class="ui-g-2"><input type="text" placeholder="" class="col-md-12"></div>
+          <div class="ui-g-1">病区号</div>
+          <div class="ui-g-2"><input type="text" placeholder="" class="col-md-12"></div>
+        </div>
+        <div class="ui-g">
+          <div class="ui-g-1">床位号</div>
+          <div class="ui-g-2"><input type="text" placeholder="" class="col-md-12"></div>
+          <div class="ui-g-1">送检科室</div>
+          <div class="ui-g-2"><input class="col-md-12"></div>
+          <!-- <div class="ui-g-2"><input type="text" [(ngModel)]="filter.InstitutionalDepartmentName" placeholder="" class="col-md-12"></div> -->
+          <div class="ui-g-1">送检医生</div>
+          <div class="ui-g-2">
+            <input class="col-md-12">
+            <!-- <input type="text" [(ngModel)]="filter.ReferringPhysicianName" placeholder="" class="col-md-12">						 -->
+          </div>
+          <div class="ui-g-1">HP</div>
+          <div class="ui-g-2"><input type="text" placeholder="" class="col-md-12"></div>
+        </div>
+        <div>
+          <div class="morefunctionblock">
+            <!-- <a href="" (click)="extendedFilter(true, $event)"
+              *ngIf="!advancedConfig" class="more">More filters<i
+              class="glyphicon glyphicon-triangle-bottom"></i></a> 
+            <a href=""
+              (click)="extendedFilter(false, $event)" *ngIf="advancedConfig"
+              class="more [hidden]">Close more filters<i
+              class="glyphicon glyphicon-triangle-top"></i></a> -->
+            <!-- <div class="more functions" *ngIf="isRole('admin')" -->
+            <div class="more functions" 
+              (clickOutside)="moreFunctionsButtons = false"
+              [clickOutsideExceptionClass]="['mainbutton','mainbutton_more_icon','glyphicon']">
+              <div class="mainbutton"
+                (click)="moreFunctionsButtons = !moreFunctionsButtons">
+                <span class="mainbutton_more_icon" *ngIf="!moreFunctionsButtons">More
+                  functions<i class="glyphicon glyphicon-triangle-bottom"></i>
+                </span> <span class="mainbutton_more_icon" *ngIf="moreFunctionsButtons">Close
+                  more functions<i class="glyphicon glyphicon-triangle-top"></i>
+                </span>
+              </div>
+              <ul *ngIf="moreFunctionsButtons">
+                <li (click)="moreFunctionsButtons = false;createPatient()"
+                  title="Create new patient">Create patient</li>
+                <li (click)="moreFunctionsButtons = false;uploadDicom()"
+                  *ngIf="externalInternalAetMode === 'internal'"
+                  title="Upload a DICOM Object">Upload DICOM Object</li>
+                <!-- <li
+                  (click)="moreFunctionsButtons = false;deleteRejectedInstances()"
+                  *ngIf="externalInternalAetMode === 'internal'"
+                  title="Delete Rejected Instances permanently">Permanent
+                  delete</li>
+                <li
+                  (click)="moreFunctionsButtons = false;retrieveMultipleStudies()"
+                  *ngIf="externalInternalAetMode === 'external'"
+                  title="Retrieve multiple studies">Retrieve multiple studies</li>
+                <li (click)="moreFunctionsButtons = false;exportMultipleStudies()"
+                  *ngIf="externalInternalAetMode === 'internal'"
+                  title="Retrieve multiple studies">Export multiple studies</li> -->
+              </ul>
+            </div>
+          </div> 
+        </div>					
+        <div class="header_block" >
+          <div class="thead header1"
+            [ngClass]="{'hover':visibleHeaderIndex === 0}">
+            <div class="tr_row">
+              <div class="th" style="text-align: center; width: 5%;">操作</div>
+              <div class="th" style="width: 8%">状态</div>
+              <div class="th" style="width: 12%">放射号</div>
+              <div style="width: 14%" class="th">
+                姓名 <a href="" class="order_arrow"
+                  (click)="$event.preventDefault();filter.orderby = 'PatientName';morePatients !== undefined ? queryPatients(0) : queryStudies(0)">
+                  <span class="glyphicon glyphicon-triangle-top"
+                  aria-hidden="true"></span>
+                </a> <a href="" class="order_arrow"
+                  (click)="$event.preventDefault();filter.orderby = '-PatientName';morePatients !== undefined ? queryPatients(0) : queryStudies(0)">
+                  <span class="glyphicon glyphicon-triangle-bottom"
+                  aria-hidden="true"></span>
+                </a>
+              </div>
+              <div class="th" style="width: 8%">检查号</div>
+              <div class="th" style="width: 8%">序列</div>
+              <div class="th" style="width: 8%">影像</div>
+              <div class="th" style="width: 8%">检查部位</div>								
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      <div id="tableblock" class="div-table animated"
+        [ngClass]="{extended:(advancedConfig),modality:showModalitySelector}"
+        contextmenu-container="meta.contextmenu">
+
+        <div class="repeat0" 
+          *ngFor="let study of studies | getKey"
+            contextmenu-item="study">
+          <div class="thead" 
+            (click)='select(study._VALUE,"patient",{"patientkey":study._KEY},"click")'>
+            <div class="tr_row" style="border-bottom: 1px solid #ddd;">
+              <div class="th" style="width: 5%; padding-left: 0;">
+                <a class="table_btn" *ngIf="isRole('admin')" style="border-left: 0; width: 50%;"
+                  (click)="$event.preventDefault();editPatient(study._VALUE, study._KEY);"
+                  href="" title="编辑信息"> <span
+                  class="glyphicon glyphicon-pencil"></span>
+                </a>
+                <a class="table_btn" style="width: 50%;"
+                  *ngIf="isRole('admin') && externalInternalAetMode === 'internal' && aetmodel.dcmInvokeImageDisplayPatientURL"
+                  (click)="$event.preventDefault();openViewer(study._VALUE.attrs,'patient')"
+                  href="" title="查看图像"> <span
+                  class="glyphicon glyphicon-eye-open"></span>
+                </a>							
+              </div>
+              <div style="width: 8%" class="th txt hover_cell tsttrim">
+                <div
+                  *ngIf="study._VALUE.attrs['00100020'] && study._VALUE.attrs['00100020'].Value && study._VALUE.attrs['00100020'].Value[0]"
+                  tooltip="{{(study._VALUE.attrs['00100020'].Value[0]) || '&nbsp;'}}">{{(study._VALUE.attrs['00100020'].Value[0])
+                  || '&nbsp;'}}</div>
+              </div>
+              <div style="width: 12%" class="th txt hover_cell tsttrim">
+                <div
+                  *ngIf="study._VALUE.attrs['00100020'] && study._VALUE.attrs['00100020'].Value && study._VALUE.attrs['00100020'].Value[0]"
+                  tooltip="{{(study._VALUE.attrs['00100020'].Value[0]) || '&nbsp;'}}">{{(study._VALUE.attrs['00100020'].Value[0])
+                  || '&nbsp;'}}</div>
+              </div>
+              <div style="width: 14%" class="th txt hover_cell">
+                <div
+                  *ngIf="study._VALUE.attrs['00100010'] && study._VALUE.attrs['00100010'].Value && study._VALUE.attrs['00100010'].Value[0]"
+                  tooltip="{{(study._VALUE.attrs['00100010'].Value[0].Alphabetic) || '&nbsp;'}}">{{(study._VALUE.attrs['00100010'].Value[0].Alphabetic|
+                  trim:20) || '&nbsp;'}}</div>
+              </div>
+              <div style="width: 8%" class="th hover_cell">
+                <div
+                  *ngIf="study._VALUE.attrs['00200011'] && study._VALUE.attrs['00200011'].Value && study._VALUE.attrs['00200011'].Value[0]">{{(study._VALUE.attrs['00200011'].Value[0]
+                  | formatDA) || '&nbsp;'}}</div>
+              </div>
+              <div style="width: 8%" class="th hover_cell">
+                <div
+                  *ngIf="study._VALUE.attrs['00100030'] && study._VALUE.attrs['00100030'].Value && study._VALUE.attrs['00100030'].Value[0]">{{(study._VALUE.attrs['00100030'].Value[0]
+                  | formatDA) || '&nbsp;'}}</div>
+              </div>
+              <div style="width: 8%" class="th hover_cell">
+                <div
+                  *ngIf="study._VALUE.attrs['00201208'] && study._VALUE.attrs['00201208'].Value && study._VALUE.attrs['00201208'].Value[0]">{{(study._VALUE.attrs['00201208'].Value[0]
+                  | formatDA) || '&nbsp;'}}</div>
+              </div>
+              <div style="width: 8%" class="th hover_cell">
+                <div
+                  *ngIf="study._VALUE.attrs['00180015'] && study._VALUE.attrs['00180015'].Value && study._VALUE.attrs['00180015'].Value[0]">{{(study._VALUE.attrs['00180015'].Value[0]
+                  | formatDA) || '&nbsp;'}}</div>
+              </div>
+              
+            </div>
+          </div>
+          
+        </div>
+      </div>
+      
+    </div>
+  </div>

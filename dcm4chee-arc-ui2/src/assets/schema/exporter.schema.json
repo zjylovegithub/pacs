@@ -1,0 +1,109 @@
+{
+	"title": "Exporter Descriptor",
+	"description": "Exporter Descriptor",
+	"type": "object",
+	"required": [
+		"dcmExporterID",
+		"dcmURI",
+		"dcmQueueName",
+		"dcmExportPriority",
+		"dcmInstanceAvailability",
+		"dcmExportPriority",
+		"dicomAETitle"
+	],
+	"properties": {
+		"dcmExporterID": {
+			"title": "Exporter ID",
+			"description": "Exporter ID",
+			"type": "string"
+		},
+		"dcmURI": {
+			"title": "URI",
+			"description": "RFC2079: Uniform Resource Identifier",
+			"type": "string"
+		},
+		"dcmQueueName": {
+			"title": "Queue Name",
+			"description": "JMS Queue Name",
+			"type": "string",
+			"format": "dcmQueueName"
+		},
+		"dcmExportPriority": {
+			"title": "Export Priority",
+			"description": "JMS Priority Level for processing the Export Task from 0 (lowest) to 9 (highest).",
+			"type": "integer",
+			"default": 4,
+			"minimum": 0,
+			"maximum": 9
+		},
+		"dicomDescription": {
+			"title": "Exporter Description",
+			"description": "Unconstrained text description of the exporter",
+			"type": "string"
+		},
+		"dicomAETitle": {
+			"title": "Application Entity (AE) title",
+			"description": "Application Entity (AE) title",
+			"type": "string",
+			"format": "dcmArchiveAETitle"
+		},
+		"dcmStgCmtSCP": {
+			"title": "Storage Commitment SCP AE Title",
+			"description": "AE Title of external Storage Commitment SCP used to verify export to another archive.",
+			"type": "string",
+			"format": "dcmAETitle"
+		},
+		"dcmIanDestination": {
+			"title": "Ian Destination",
+			"description": "Destination to send IAN N-CREATE RQ",
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"format": "dcmAETitle"
+		},
+		"dcmRetrieveAET": {
+			"title": "Retrieve AE Title",
+			"description": "AE Title associated with Network AE",
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"format": "dcmArchiveAETitle"
+		},
+		"dcmRetrieveLocationUID": {
+			"title": "Retrieve Location UID",
+			"description": "Retrieve Location UID.",
+			"type": "string",
+			"pattern": "^[0-2]((\\.0)|(\\.[1-9][0-9]*))*$"
+		},
+		"dcmInstanceAvailability": {
+			"title": "Instance Availability",
+			"description": "Instance Availability.",
+			"type": "string",
+			"default": "ONLINE",
+			"enum": [
+				"ONLINE",
+				"NEARLINE",
+				"OFFLINE"
+			]
+		},
+		"dcmSchedule": {
+			"title": "Schedule",
+			"description": "Schedule Expression in format 'hour=[0-23] dayOfWeek=[0-6]' (0=Sunday)",
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"format": "dcmSchedule"
+		},
+		"dcmProperty": {
+			"title": "Property",
+			"description": "Property in format <name>=<value>",
+			"type": "array",
+			"items": {
+				"type": "string"
+			}
+		}
+	}
+}

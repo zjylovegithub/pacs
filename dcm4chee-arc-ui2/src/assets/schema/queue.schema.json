@@ -1,0 +1,77 @@
+{
+	"title": "Queue",
+	"description": "Managed JMS Queue",
+	"type": "object",
+	"required": [
+		"dcmQueueName",
+		"dcmJndiName",
+		"dcmRetryDelay",
+		"dcmRetryOnWarning",
+		"dcmRetryDelayMultiplier",
+		"dcmMaxRetries",
+		"dcmMaxQueueSize"
+	],
+	"properties": {
+		"dcmQueueName": {
+			"title": "Queue Name",
+			"description": "JMS Queue Name",
+			"type": "string"
+		},
+		"dcmJndiName": {
+			"title": "JNDI Name",
+			"description": "JNDI Name",
+			"type": "string"
+		},
+		"dicomDescription": {
+			"title": "DICOM Description",
+			"description": "Textual description of the DICOM entity",
+			"type": "string"
+		},
+		"dcmMaxRetries": {
+			"title": "Maximum Number of Retries",
+			"description": "Maximal number of retries to process tasks scheduled in a specific queue.",
+			"type": "integer",
+			"minimum": 0,
+			"default": 0
+		},
+		"dcmRetryDelay": {
+			"title": "Retry Delay",
+			"description": "Delay to retry to process tasks scheduled in a specific queue in ISO-8601 duration format PnDTnHnMn.nS.",
+			"type": "string",
+			"default": "PT1M",
+			"format": "dcmDuration"
+		},
+		"dcmMaxRetryDelay": {
+			"title": "Maximum Retry Delay",
+			"description": "Maximal Delay to retry to process tasks scheduled in a specific queue in ISO-8601 duration format PnDTnHnMn.nS. Infinite if absent.",
+			"type": "string",
+			"format": "dcmDuration"
+		},
+		"dcmRetryDelayMultiplier": {
+			"title": "Retry Delay Multiplier",
+			"description": "Multiplier in % that will take effect on top of dcmRetryDelay with dcmMaxRetryDelay to be taken into account.",
+			"type": "integer",
+			"minimum": 100,
+			"default": 100
+		},
+		"dcmRetryOnWarning": {
+			"title": "Retry on Warning",
+			"description": "Enables retries to process tasks not only on failure but also on a warning outcome status in a specific queue.",
+			"type": "boolean",
+			"default": false
+		},
+		"dcmPurgeQueueMessageCompletedDelay": {
+			"title": "Delay for purging completed queue messages",
+			"description": "Delay in ISO-8601 duration format PnDTnHnMn.nS after which completed queue messages are purged. If absent, there is no deletion for that particular queue",
+			"type": "string",
+			"format": "dcmDuration"
+		},
+		"dcmMaxQueueSize": {
+			"title": "Maximum Queue Size",
+			"description": "Maximal number of scheduled tasks in the queue. If the number of scheduled tasks reaches the limit, an attempt to schedule another tasks will fail. 0 = no limitation.",
+			"type": "integer",
+			"default": 0,
+			"minimum": 0
+		}
+	}
+}

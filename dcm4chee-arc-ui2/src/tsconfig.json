@@ -1,0 +1,23 @@
+{	
+	"compileOnSave": false,
+	"compilerOptions": {
+		"declaration": false,
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"lib": [
+			"es6",
+			"dom"
+		],
+		"mapRoot": "./",
+		"module": "es6",
+		"moduleResolution": "node",
+		"outDir": "../dist/",
+		"rootDir": ".",
+		"baseUrl": "src",		
+		"sourceMap": true,
+		"target": "es5",
+		"typeRoots": [
+			"../node_modules/@types"
+		]
+	}
+}

@@ -1,0 +1,8 @@
+<p-tabView [activeIndex]="tabindex" (onChange)="handleChange($event)">
+  <p-tabPanel header="检查列表" >
+      <app-study-checklist></app-study-checklist>
+  </p-tabPanel>
+  <p-tabPanel header="诊断报告"  >
+      <app-study-diagnose></app-study-diagnose>
+  </p-tabPanel>
+</p-tabView>
