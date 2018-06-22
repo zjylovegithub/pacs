@@ -70,7 +70,7 @@ import {J4careHttpService} from "./helpers/j4care-http.service";
 import { ExternalRetrieveComponent } from './monitoring/external-retrieve/external-retrieve.component';
 import {ExternalRetrieveService} from "./monitoring/external-retrieve/external-retrieve.service";
 import { FilterGeneratorComponent } from './helpers/filter-generator/filter-generator.component';
-import {CalendarModule} from "primeng/components/calendar/calendar";
+import { CalendarModule } from 'primeng/components/calendar/calendar';
 import { ClickOutsideDirective } from './helpers/click-outside.directive';
 import {DynamicFieldService} from "./widgets/dynamic-field/dynamic-field.service";
 import {TabViewModule} from 'primeng/components/tabview/tabview';

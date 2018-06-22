@@ -1,0 +1,9 @@
+version: 1
+# LDIF for modifying the AE Title of the Archive
+# Adjust Base DN (dc=dc=dcm4che,dc=org), Device name (dcm4chee-arc), previous AE Title (DCM4CHEE),
+# new AE Title (MY_AE) before import it into the LDAP server
+dn: dicomAETitle=DCM4CHEE,dicomDeviceName=dcm4chee-arc,cn=Devices,cn=DICOM Configuration,dc=dcm4che,dc=org
+changetype: moddn
+newrdn: dicomAETitle=MY_AE
+deleteoldrdn: 1
+newsuperior: dicomDeviceName=dcm4chee-arc,cn=Devices,cn=DICOM Configuration,dc=dcm4che,dc=org

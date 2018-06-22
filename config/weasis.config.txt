@@ -1,0 +1,5 @@
+Invoke Image Display Patient URL
+../../weasis-pacs-connector/getJnlpScheme/viewer?requestType=PATIENT&patientID={}
+
+Invoke Image Display Study URL
+../../weasis-pacs-connector/getJnlpScheme/viewer?requestType=STUDY&studyUID={}
